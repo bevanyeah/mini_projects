@@ -71,10 +71,10 @@ void setup() {
 
 // VARIABLES
 // THe word to be converted to morse
-char word[] = "BEVAN";
+const char word[] = "BEVAN";
 
 // How long each 'tick' will take.   ~250 is pretty good
-int multiplier = 250;
+const int multiplier = 250;
 
 // Some global loop positions and reset toggles for reseting and stopping our morse signal
 int global_loop = -1;
@@ -82,7 +82,7 @@ int push_reset = 0;
 
 
 // We initialise an array to contain the word in the encoded form, which comprises of at least 4 components per letter.  we also need an end of array signal (+1)
-const int pattern_length = 100;
+const int pattern_length = 99;
 int pattern[pattern_length];
 
 
@@ -147,7 +147,7 @@ void build_display_morse() {
         pattern[i] = 0;
     }
     
-    pattern[pattern_length-2] = 9;
+    pattern[pattern_length-1] = 9;
     // iterate through the word
     for (int i = 0; i < strlen(word) ; i++){
     
@@ -174,31 +174,7 @@ void build_display_morse() {
                     pattern[8*i+5] = 1;
                     pattern[8*i+6] = codes[letter_val][3];
                 }
-                else {
-                // remainder of array is 0s
-                    pattern[8*i+5] = 0;
-                    pattern[8*i+6] = 0;
-            
-                }
             }
-            else {
-                // remainder of array is 0s
-                pattern[8*i+3] = 0;
-                pattern[8*i+4] = 0;
-                pattern[8*i+5] = 0;
-                pattern[8*i+6] = 0;
-
-            }
-        }
-        else {
-            // remainder of array is 0s
-            pattern[8*i+1] = 0;
-            pattern[8*i+2] = 0;
-            pattern[8*i+3] = 0;
-            pattern[8*i+4] = 0;
-            pattern[8*i+5] = 0;
-            pattern[8*i+6] = 0;
-            
         }
 
     // Always delay for 3 ticks after the character has finished
